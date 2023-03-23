@@ -30,12 +30,18 @@ class Party(models.Model):
     party_id = models.CharField(max_length=11, blank=False)
     party_name = models.CharField(max_length=11, blank=False)
 
+    def __str__(self) -> str:
+        return self.party_name
+
 # polling unit > ward > lga > state : using this to define relationship amongs
 # table
 
 class State(models.Model):
     state_id = models.IntegerField(primary_key=True, unique=True)
     state_name = models.CharField(max_length=50, blank=False)
+
+    def __str__(self) -> str:
+        return self.state_name
 
 class Lga(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
@@ -50,6 +56,9 @@ class Lga(models.Model):
     date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
     user_ip_address = models.GenericIPAddressField()
 
+    def __str__(self) -> str:
+        return self.lga_name
+
 class Ward(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
     ward_id = models.IntegerField(max_length=11, unique=False)
@@ -59,6 +68,9 @@ class Ward(models.Model):
     ward_description = models.TextField(blank=True)
     entered_by_user = models.CharField(max_length=50, blank=False)
     date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
+
+    def __str__(self) -> str:
+        return self.ward_name
 
 class Polling_unit(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
@@ -78,6 +90,9 @@ class Polling_unit(models.Model):
     date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
     user_ip_address = models.GenericIPAddressField(null=True)
 
+    def __str__(self) -> str:
+        return self.polling_unit_id
+    
 class Announced_state_results(models.Model):
     state_name = models.CharField(max_length=50, blank=False)
     party_abbreviation = models.CharField(max_length=4, blank=False)
@@ -85,6 +100,9 @@ class Announced_state_results(models.Model):
     entered_by_user = models.CharField(max_length=50, blank=False)
     date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
     user_ip_address = models.GenericIPAddressField(null=True)
+
+    def __str__(self) -> str:
+        return self.state_name + 'announced result'
 
 class Announced_lga_results(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
@@ -99,6 +117,9 @@ class Announced_lga_results(models.Model):
     date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
     user_ip_address = models.GenericIPAddressField(null=True)
 
+    def __str__(self) -> str:
+        return self.lga_name + 'announced result'
+
 class Announced_ward_results(models.Model):
     ward_name = models.CharField(max_length=50, blank=False)
     party_abbreviation = models.CharField(max_length=4, blank=False)
@@ -106,6 +127,9 @@ class Announced_ward_results(models.Model):
     entered_by_user = models.CharField(max_length=50, blank=False)
     date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
     user_ip_address = models.GenericIPAddressField(null=True)
+
+    def __str__(self) -> str:
+        return self.ward_name + 'announced result'
 
 class Announced_pu_results(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
@@ -115,3 +139,6 @@ class Announced_pu_results(models.Model):
     entered_by_user = models.CharField(max_length=50, blank=False)
     date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
     user_ip_address = models.GenericIPAddressField(null=True)
+
+    def __str__(self) -> str:
+        return 'polling unit'+ self.polling_unit_uniqueid + 'announced result'

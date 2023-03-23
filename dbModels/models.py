@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 import uuid
+from django.utils import timezone
 
 # Create your models here.
 
@@ -46,61 +47,65 @@ class Lga(models.Model):
     state_id = models.ForeignKey(State, on_delete=models.CASCADE, blank=True, null=True)
     lga_description = models.TextField()
     entered_by_user = models.CharField(max_length=50, blank=False)
-    date_entered = models.DateField(blank=False, auto_now_add=True)
+    date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
     user_ip_address = models.GenericIPAddressField()
 
 class Ward(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
-    ward_id = models.IntegerField(max_length=11, unique=True)
+    ward_id = models.IntegerField(max_length=11, unique=False)
     ward_name = models.CharField(max_length=50, blank=False)
     # 1 to many relationship with lga
     lga_id = models.ForeignKey(Lga, on_delete=models.CASCADE, blank=True, null=True)
     ward_description = models.TextField(blank=True)
     entered_by_user = models.CharField(max_length=50, blank=False)
-    date_entered = models.DateField(blank=False, auto_now_add=True)
+    date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
 
 class Polling_unit(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
-    Polling_unit_id = models.IntegerField(blank=False)
+    polling_unit_id = models.IntegerField(blank=False)
     # 1 to many relationship with ward
-    ward_id = models.IntegerField()
+    ward_id = models.IntegerField(blank=True, null=True)
     # 1 to many with lga
     # lga_id = models.IntegerField()
     lga_id = models.ForeignKey(Lga, on_delete=models.CASCADE, blank=True, null=True)
-    unique_ward_id = models.IntegerField(default=None)
-    polling_unit_number = models.IntegerField(blank=False)
+    unique_ward_id = models.IntegerField(blank=True)
+    polling_unit_number = models.CharField(max_length=50,blank=False)
     polling_unit_name = models.CharField(max_length=50, blank=False)
     polling_unit_description = models.TextField()
     lat = models.CharField(max_length=255, blank=True)
     long = models.CharField(max_length=255, blank=True)
     entered_by_user = models.CharField(max_length=50, blank=False)
-    date_entered = models.DateField(blank=False, auto_now_add=True)
-    user_ip_address = models.GenericIPAddressField()
+    date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
+    user_ip_address = models.GenericIPAddressField(null=True)
 
 class Announced_state_results(models.Model):
     state_name = models.CharField(max_length=50, blank=False)
     party_abbreviation = models.CharField(max_length=4, blank=False)
     party_score = models.IntegerField(max_length=11, blank=False)
     entered_by_user = models.CharField(max_length=50, blank=False)
-    date_entered = models.DateField(blank=False, auto_now_add=True)
-    user_ip_address = models.GenericIPAddressField()
+    date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
+    user_ip_address = models.GenericIPAddressField(null=True)
 
 class Announced_lga_results(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
-    lga_name = models.CharField(max_length=50, blank=False)
+
+    # 1 to many relationship
+    # lga_name = models.ForeignKey(Lga, on_delete=models.CASCADE, blank=True, null=True)
+    lga_name = models.CharField(max_length=50, blank=False, null=True)
+
     party_abbreviation = models.CharField(max_length=4, blank=False)
     party_score = models.IntegerField(blank=False)
     entered_by_user = models.CharField(max_length=50, blank=False)
-    date_entered = models.DateField(blank=False, auto_now_add=True)
-    user_ip_address = models.GenericIPAddressField()
+    date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
+    user_ip_address = models.GenericIPAddressField(null=True)
 
 class Announced_ward_results(models.Model):
     ward_name = models.CharField(max_length=50, blank=False)
     party_abbreviation = models.CharField(max_length=4, blank=False)
     party_score = models.IntegerField(max_length=11, blank=False)
     entered_by_user = models.CharField(max_length=50, blank=False)
-    date_entered = models.DateField(blank=False, auto_now_add=True)
-    user_ip_address = models.GenericIPAddressField()
+    date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
+    user_ip_address = models.GenericIPAddressField(null=True)
 
 class Announced_pu_results(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
@@ -108,5 +113,5 @@ class Announced_pu_results(models.Model):
     party_abbreviation = models.CharField(max_length=4, blank=False)
     party_score = models.IntegerField(max_length=11, blank=False)
     entered_by_user = models.CharField(max_length=50, blank=False)
-    date_entered = models.DateField(blank=False, auto_now_add=True)
-    user_ip_address = models.GenericIPAddressField()
+    date_entered = models.DateTimeField(default=timezone.now, blank=True,null=True)
+    user_ip_address = models.GenericIPAddressField(null=True)

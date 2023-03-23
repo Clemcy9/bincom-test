@@ -4,4 +4,4 @@ from .models import Agent, Party, Polling_unit, Lga, State, Ward, Announced_pu_r
 
 # Register your models here.
 
-admin.site.register([Agent,Party,Polling_unit,Lga,State,Ward])
+admin.site.register([Agent,Party,Polling_unit,Lga,State,Ward, Announced_lga_results])

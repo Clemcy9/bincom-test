@@ -6,3 +6,18 @@ users = [(1, 'Christian', 'Emenike', 'christian@bincom.net', '08034699500', 1),
 
 for u in users:
     print(f'username={u[1]}, phone={u[4]}')
+
+# required field agent
+"""
+Email: clemcy9@gmail.com
+Username: clement
+Phone: 08020366909
+Pollingunit uniqueid: 1
+Password:
+Password (again):
+"""
+
+# script
+'''
+a = Agent(first_name='aboy',last_name='idem',email='aboy@gmail.com',phone='08020366909',pollingunit_uniqueid=1)
+'''

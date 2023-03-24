@@ -19,18 +19,18 @@
     <div>
         <ul>
             <li>
-                <a href="">Check Polling Units Results</a>
+                <a href="{% url 'dbModels:pu_result' %}">Check Polling Units Results</a>
             </li>
             <li>
-                <a href="">Check LGA summed Results</a>
+                <a href="{% url 'dbModels:lga_result' %}">Check LGA summed Results</a>
             </li>
             <li>
-                <a href="">Upload New Polling Unit Result</a>
+                <a href="{% url 'dbModels:new_pu' %}">Upload New Polling Unit Result</a>
             </li>
         </ul>
     </div>
     <div>
-        <p>You could visit the <a href="">admin</a> page to view our models</p>
+        <p>You could visit the <a href="../admin">admin</a> page to view our models</p>
         <p>login details</p>
         <p><strong>username: clemcy9@gmail.com</strong></p>
         <strong>password: 08020366909</strong>

@@ -108,8 +108,9 @@ class Announced_lga_results(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
 
     # 1 to many relationship
-    # lga_name = models.ForeignKey(Lga, on_delete=models.CASCADE, blank=True, null=True)
-    lga_name = models.CharField(max_length=50, blank=False, null=True)
+    # lga_name is actually supposed to be lga_id from data given
+    lga_name = models.ForeignKey(Lga, on_delete=models.CASCADE, blank=True, null=True)
+    # lga_name = models.CharField(max_length=50, blank=False, null=True)
 
     party_abbreviation = models.CharField(max_length=4, blank=False)
     party_score = models.IntegerField(blank=False)
@@ -118,7 +119,7 @@ class Announced_lga_results(models.Model):
     user_ip_address = models.GenericIPAddressField(null=True)
 
     def __str__(self) -> str:
-        return self.lga_name + 'announced result'
+        return self.party_abbreviation + f' announced result for lga {self.lga_name}'
 
 class Announced_ward_results(models.Model):
     ward_name = models.CharField(max_length=50, blank=False)

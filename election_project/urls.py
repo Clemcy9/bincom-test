@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
+# app_name ='election_project'
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls,name='admin-page'),
     path('home/', include('dbModels.urls')),
     path('', RedirectView.as_view(url='home/'))
 

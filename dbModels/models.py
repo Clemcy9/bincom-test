@@ -149,4 +149,5 @@ class Announced_pu_results(models.Model):
     user_ip_address = models.GenericIPAddressField(null=True)
 
     def __str__(self) -> str:
-        return 'polling unit'+ self.polling_unit_uniqueid + 'announced result'
+        return  f'announced result for {self.polling_unit_uniqueid}' 
+    # self.party_abbreviation + f' announced result for {self.lga_name} lga'

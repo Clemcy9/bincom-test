@@ -969,11 +969,22 @@ alvs = [
 
 # script
 
+# method1 with table relationship
+# for a in alvs:
+#     alv = Announced_lga_results(unique_id = a[0],lga_name = a[1], party_abbreviation=a[2], party_score =a[3],entered_by_user=a[4],date_entered=a[5], user_ip_address=a[6])
+#     alvs.save()
+
+# method2 with table relationship
 for a in alvs:
-    alv = Announced_lga_results(unique_id = a[0],lga_name =Lga.objects.get(lga_id = a[1]), party_abbreviation=a[2], party_score =a[3],entered_by_user=a[4],date_entered=a[5], user_ip_address=a[6])
-    # alv = Announced_lga_results(unique_id = a[0],lga_name = a[1], party_abbreviation=a[2], party_score =a[3],entered_by_user=a[4],date_entered=a[5], user_ip_address=a[6])
-    
-    alv.save()
+    try:
+        alv = Announced_lga_results(unique_id = a[0],lga_name =Lga.objects.get(lga_id = a[1]), party_abbreviation=a[2], party_score =a[3],entered_by_user=a[4],date_entered=a[5], user_ip_address=a[6])
+        print('match found with lga id')
+
+    except:
+        alv = Announced_lga_results(unique_id = a[0], party_abbreviation=a[2], party_score =a[3],entered_by_user=a[4],date_entered=a[5], user_ip_address=a[6])
+        print(f'no match for id {a[1]}')
+    finally:
+        alv.save()
 # noticed that the lga_name field is actually carrying a number instead of name
 
 # announced_pu_result values

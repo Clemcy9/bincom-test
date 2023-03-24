@@ -119,10 +119,14 @@ class Announced_lga_results(models.Model):
     user_ip_address = models.GenericIPAddressField(null=True)
 
     def __str__(self) -> str:
-        return self.party_abbreviation + f' announced result for lga {self.lga_name}'
+        return self.party_abbreviation + f' announced result for {self.lga_name} lga'
 
 class Announced_ward_results(models.Model):
-    ward_name = models.CharField(max_length=50, blank=False)
+    unique_id = models.IntegerField(primary_key=True, unique=True)
+    # relationship with Ward unit table
+    ward_name = models.ForeignKey(Ward, on_delete=models.CASCADE, blank=True, null=True)
+    # ward_name = models.CharField(max_length=50, blank=False)
+
     party_abbreviation = models.CharField(max_length=4, blank=False)
     party_score = models.IntegerField(max_length=11, blank=False)
     entered_by_user = models.CharField(max_length=50, blank=False)
@@ -134,7 +138,10 @@ class Announced_ward_results(models.Model):
 
 class Announced_pu_results(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
-    polling_unit_uniqueid = models.CharField(max_length=50, blank=False)
+    # relationship with Polling unit table
+    polling_unit_uniqueid = models.ForeignKey(Polling_unit, on_delete=models.CASCADE, blank=True, null=True)
+    # polling_unit_uniqueid = models.CharField(max_length=50, blank=False)
+
     party_abbreviation = models.CharField(max_length=4, blank=False)
     party_score = models.IntegerField(max_length=11, blank=False)
     entered_by_user = models.CharField(max_length=50, blank=False)

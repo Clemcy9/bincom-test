@@ -91,7 +91,7 @@ class Polling_unit(models.Model):
     user_ip_address = models.GenericIPAddressField(null=True)
 
     def __str__(self) -> str:
-        return self.polling_unit_id
+        return self.polling_unit_name + ' PU'
     
 class Announced_state_results(models.Model):
     state_name = models.CharField(max_length=50, blank=False)

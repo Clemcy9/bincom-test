@@ -15,20 +15,22 @@
         </h1>
     </div>
     <div class="mb-3 container-md">
-       
+       <!-- Lga option -->
       <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
         <option selected>Choose LGA</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        {% for lga in lgas %}
+            <option value="{{lga.lga_id}}">{{lga.lga_name}}</option>
+            
+        {% endfor %}
       </select>
-      
       <select class="form-select form-select-md mb-3" aria-label=".form-select-md mb-3 example">
         <option selected>Choose Ward</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        {% for ward in lga.ward_set.all %}
+        <option value="1">{{ward}}</option>
+        {% endfor %}
       </select>
+      
+      
       <select class="form-select form-select-md mb-3" aria-label=".form-select-md mb-3 example">
         <option selected>Choose Polling Unit</option>
         <option value="1">One</option>

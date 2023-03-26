@@ -18,9 +18,9 @@
         <form action="">
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 <option selected>Choose LGA</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                {% for lga in lgas %}
+                <option value="{{lga.lga_id}}">{{lga.lga_name}}</option>
+                {% endfor %}
               </select>
               
               

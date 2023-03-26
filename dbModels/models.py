@@ -28,7 +28,7 @@ class Agent(AbstractUser):
 class Party(models.Model):
     unique_id = models.IntegerField(primary_key=True, unique=True)
     party_id = models.CharField(max_length=11, blank=False)
-    party_name = models.CharField(max_length=11, blank=False)
+    party_name = models.CharField(max_length=11, blank=False, unique=True)
 
     def __str__(self) -> str:
         return self.party_name
@@ -143,7 +143,7 @@ class Announced_pu_results(models.Model):
     # polling_unit_uniqueid = models.CharField(max_length=50, blank=False)
 
     # relationship with party table
-    party_abbreviation= models.ForeignKey(Party, on_delete=models.CASCADE)
+    party_abbreviation= models.ForeignKey(Party, on_delete=models.CASCADE, to_field='party_name',blank=True, null=True)
     # party_abbreviation = models.CharField(max_length=4, blank=False)
     party_score = models.IntegerField(max_length=11, blank=False)
     entered_by_user = models.CharField(max_length=50, blank=False)
@@ -151,5 +151,5 @@ class Announced_pu_results(models.Model):
     user_ip_address = models.GenericIPAddressField(null=True)
 
     def __str__(self) -> str:
-        return  f'announced result for {self.polling_unit_uniqueid}' 
+        return  f'{self.party_abbreviation or "NULL party"} result for {self.polling_unit_uniqueid}' 
     # self.party_abbreviation + f' announced result for {self.lga_name} lga'

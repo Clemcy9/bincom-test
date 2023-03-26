@@ -1149,11 +1149,11 @@ apuvs = [
 
 for pu in apuvs:
     try:
-        polling = Announced_pu_results(unique_id = pu[0], polling_unit_uniqueid=Polling_unit.objects.get(unique_id=pu[1]),party_abbreviation=pu[2],party_score=pu[3],entered_by_user =pu[4],date_entered=pu[5],user_ip_address=pu[6])
+        polling = Announced_pu_results(unique_id = pu[0], polling_unit_uniqueid=Polling_unit.objects.get(unique_id=pu[1]),party_abbreviation=Party.objects.get(party_name=pu[2]),party_score=pu[3],entered_by_user =pu[4],date_entered=pu[5],user_ip_address=pu[6])
         print(f'match found')
     except:
         print(f'match not found for PU{pu[1]}')
-        polling = Announced_pu_results(unique_id = pu[0], polling_unit_uniqueid=Polling_unit.objects.get(unique_id=pu[1]),party_abbreviation=pu[2],party_score=pu[3],entered_by_user =pu[4],date_entered=pu[5],user_ip_address=pu[6])
+        polling = Announced_pu_results(unique_id = pu[0], polling_unit_uniqueid=Polling_unit.objects.get(unique_id=pu[1]),party_score=pu[3],entered_by_user =pu[4],date_entered=pu[5],user_ip_address=pu[6])
     
     finally:
         polling.save()

@@ -7,11 +7,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
     <title>Polling unit result</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+    .dropdown-submenu {
+    position: relative;
+    }
+
+    .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+    }
+    </style>
 </head>
 <body>
     <div class="container-md mx-auto">
         <h1>
-            Polling unit results
+            Polling unit results cccc
         </h1>
     </div>
     <div class="mb-3 container-md">
@@ -48,6 +62,46 @@
         </h3>
     </div>
 
+    <div class="container">
+        <h2>Multi-Level Dropdowns</h2>
+        <p>In this example, we have created a .dropdown-submenu class for multi-level dropdowns (see style section above).</p>
+        <p>Note that we have added jQuery to open the multi-level dropdown on click (see script section below).</p>                                        
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials</button>
+          <ul class="dropdown-menu">
+            {% for lga in lgas %}
+            <li><a tabindex="-1" href="#">{{lga}}</a></li>
+            <li class="dropdown-submenu">
+              <a class="test" tabindex="-1" href="#">{{lga}}<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                {% for ward in lga.ward_set.all() %}
+                <li><a tabindex="-1" href="#">{{ward}}</a></li>
+                <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                {% endfor %}
+                <li class="dropdown-submenu">
+                  <a class="test" href="#">Another dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">3rd level dropdown</a></li>
+                    <li><a href="#">3rd level dropdown</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+          $('.dropdown-submenu a.test').on("click", function(e){
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+          });
+        });
+        </script>
 </body>
 </html>

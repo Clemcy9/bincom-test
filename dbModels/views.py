@@ -27,8 +27,8 @@ def new_pu(request):
     if request.method == 'POST':
         f = PU_result_form(request.POST)
         f.save()
-        # return HttpResponseRedirect(reverse('dbModels:home'))
-        return HttpResponseRedirect('/thanks/')
+        return HttpResponseRedirect(reverse('dbModels:home'))
+        # return HttpResponseRedirect('/thanks/')
     else:
         f = PU_result_form()
     return render(request, 'new_pu_result.html',{'form':f})

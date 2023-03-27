@@ -15,8 +15,9 @@
         </h1>
     </div>
     <div class="mb-3 container-md">
-        <form action="">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <form action="{% url 'dbModels:lga_result' %}" method="post">
+            {% csrf_token %}
+            <select name="lga" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 <option selected>Choose LGA</option>
                 {% for lga in lgas %}
                 <option value="{{lga.lga_id}}">{{lga.lga_name}}</option>
@@ -24,17 +25,25 @@
               </select>
               
               
-              <button type="button" class="btn btn-outline-primary">Check</button>
+              <button type="submit" class="btn btn-outline-primary">Check</button>
         </form>
+        <div class="mt-5">
+            {% for x,y in result_dict.items %}
+            <h5>{{x}}:{{y}}</h5>
+            {% endfor %}
+        </div>
        
       
-      <div class="mb-3 mt-3">
+      <!-- <div class="mb-3 mt-3">
         <label for="exampleFormControlTextarea1" class="form-label">Result area</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" >helo</textarea>
-      </div>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" >
+           
+        </textarea>
+      </div> -->
     <div class="mt-3">
         <h3>
             Go back <a href="{% url 'dbModels:home' %}">home</a>
+            <!-- {{result_dict}} -->
         </h3>
     </div>
 

@@ -11,6 +11,12 @@
         {% csrf_token %}
 
         {{form}}
+        {% for x in form %}
+        <fieldset>
+            {{x.label}}
+            {{x.field}}
+        </fieldset>
+        {% endfor %}
         <input type="submit" value="Submit">
     </form>
 </body>

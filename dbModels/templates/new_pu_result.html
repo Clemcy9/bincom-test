@@ -10,12 +10,12 @@
     <form action="{% url 'dbModels:new_pu'%}" method="post">
         {% csrf_token %}
 
-        {{form}}
         {% for x in form %}
-        <fieldset>
-            {{x.label}}
-            {{x.field}}
-        </fieldset>
+        <div>
+            {{x.errors}}
+            {{x.label_tag}}
+            {{x}}
+        </div>
         {% endfor %}
         <input type="submit" value="Submit">
     </form>
